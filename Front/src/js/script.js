@@ -14,6 +14,6 @@ async function POST() {
 
 
 let appendice = {
-    "comando": `git commit "configuring server"`,
+    "comando": ``,
     "pages": ["https://dev.to/alexandrefreire/o-que-e-fetch-1laa", "https://pt.stackoverflow.com/questions/466798/express-req-body-n%C3%A3o-acha-os-dados-enviados-pelo-cliente", "https://pt.stackoverflow.com/questions/432506/enviando-par%C3%A2metro-body-via-fetch-api", "https://pt.stackoverflow.com/questions/528292/req-body-retornando-objeto-vazio"]
 }
