@@ -1,15 +1,16 @@
 async function POST() {
  
    
-          fetch("https://8080-kaiquepires-loginmodule-gu67nicbdse.ws-us77.gitpod.io/", {
+          fetch("http://localhost:8080/", {
             method: 'POST',
             mode:"no-cors",
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json; charset=utf-8'
              },
-            body: JSON.stringify({ "kaique": "lindo" })
-        }).then(console.log("rodou"))
+            body: { "kaique": "lindo" }
+        })
+        .then(console.log("rodou"))
 }
 
 

@@ -16,7 +16,7 @@ body {
   justify-content: center;
 }
 
-.form {
+form {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0px 85px;
@@ -24,7 +24,7 @@ body {
   justify-content: center;
 }
 
-.login {
+.email {
   grid-column: 1/ -1;
   height: 65px;
   width: 400px;
@@ -33,7 +33,7 @@ body {
   border-radius: 50px;
 }
 
-.senha {
+.password {
   grid-column: 1/-1;
   height: 65px;
   text-align: center;
@@ -49,7 +49,7 @@ body {
   color: #67737e;
 }
 
-.cadastro {
+.register {
   position: relative;
   grid-column: 1/-1;
   height: 65px;
@@ -60,8 +60,8 @@ body {
   background: #e20000;
 }
 
-.entrar p,
-.cadastro p {
+.login p,
+.register p {
   font-size: 22px;
   font-weight: bold;
   text-align: center;
@@ -69,7 +69,7 @@ body {
   text-transform: uppercase;
 }
 
-.cadastro::before {
+.register::before {
   display: flex;
   content: "";
   display: block;
@@ -81,7 +81,7 @@ body {
   right: 3px;
 }
 
-.entrar {
+.login {
   height: 65px;
   width: 160px;
   border-radius: 50px;

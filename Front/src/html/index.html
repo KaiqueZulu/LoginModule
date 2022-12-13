@@ -12,19 +12,19 @@
 
 <body>
   <div class="container">
-    <div class="form">
-      <input type="email" placeholder="login" class="login">
-      <input type="password" placeholder="senha" class="senha">
+    <form class="form" action="/" method="post">
+      <input type="email" placeholder="email" class="email">
+      <input type="password" placeholder="password" class="password">
       <a href="/" class="text">
-        <p> Esqueçeu a senha? </p>
+        <p> Forgot password? </p>
       </a>
-      <button class="entrar" type="button" onclick="POST()">
-        <p> entrar </p>
+      <button class="login" type="submit" onclick="POST()">
+        <p> Login </p>
       </button>
-      <button class="cadastro" type="submit">
-        <p>cadastre-se </p>
+      <button class="register" type="submit">
+        <p> Register </p>
       </button>
-    </div>
+    </form>
   </div>
 </body>
 
