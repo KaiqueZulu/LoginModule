@@ -2,9 +2,9 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 import UserRepository from "../repository/UserRepository.js";
-import UserException from "../exception/UserException.js";
-import * as httpStatus from "../../../config/constants/httpStatus.js";
-import * as secrets from "../../../config/constants/secrets.js";
+import Exception from "../../../constants/Exception.js";
+import * as httpStatus from "../../../constants/httpStatus.js";
+import * as secrets from "../../../constants/secrets.js";
 
 class UserService {
     async findByEmail(req) {
@@ -37,19 +37,19 @@ class UserService {
 
     validateRequestData(email) {
         if (!email) {
-            throw new UserException(httpStatus.BAD_REQUEST, "User email was not informed. ");
+            throw new Exception(httpStatus.BAD_REQUEST, "User email was not informed. ");
         };
     };
 
     validateUserNotFound(user) {
         if (!user) {
-            throw new Error(httpStatus.BAD_REQUEST, "User was not found.");
+            throw new Exception(httpStatus.BAD_REQUEST, "User was not found.");
         };
     };
 
     validadeAuthenticatedUser(user, authUser) {
         if (!authUser || user.id !== authUser.id) {
-            throw new UserException(httpStatus.FORBIDDEN, "You cannot see this user data.");
+            throw new Exception(httpStatus.FORBIDDEN, "You cannot see this user data.");
         };
     };
 
@@ -87,13 +87,13 @@ class UserService {
 
     validateAccessTokenData(email, password) {
         if (!email || !password) {
-            throw new UserException(httpStatus.UNAUTHORIZED, "Email and password must be informed");
+            throw new Exception(httpStatus.UNAUTHORIZED, "Email and password must be informed");
         };
     };
 
     async validatePassword(password, hashPassword) {
         if (!await bcrypt.compare(password, hashPassword)) {
-            throw new UserException(httpStatus.UNAUTHORIZED, "Password doesn't match.");
+            throw new Exception(httpStatus.UNAUTHORIZED, "Password doesn't match.");
         };
     };
 };

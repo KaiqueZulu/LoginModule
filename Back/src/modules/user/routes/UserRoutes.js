@@ -3,7 +3,7 @@ import {
 } from "express";
 
 import UserController from "../controller/userController.js";
-import checkToken from "../../../config/auth/checkToken.js"
+import checkToken from "../../../middlewares/auth/checkToken.js"
 
 const router = new Router();
 
