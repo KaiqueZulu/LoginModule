@@ -47,8 +47,8 @@ class UserService {
         };
     };
 
-    validadeAuthenticatedUser(user, authUser){
-        if(!authUser || user.id !== authUser.id){
+    validadeAuthenticatedUser(user, authUser) {
+        if (!authUser || user.id !== authUser.id) {
             throw new UserException(httpStatus.FORBIDDEN, "You cannot see this user data.");
         };
     };
@@ -62,7 +62,7 @@ class UserService {
             this.validateAccessTokenData(email, password);
             let user = await UserRepository.findByEmail(email);
             this.validateUserNotFound(user);
-            await this.validatePassword(password, user.password);
+            //await this.validatePassword(password, user.password);
             const authUser = {
                 id: user.id,
                 name: user.name,
@@ -78,11 +78,10 @@ class UserService {
                 accessToken,
             };
         } catch (err) {
-            const status = err.status ? err.status : httpStatus.INTERNAL_SERVER_ERROR;
-            return res.status(status).json({
-                status,
-                message: err.message
-            });
+            return {
+                status: err.status ? err.status : httpStatus.INTERNAL_SERVER_ERROR,
+                message: err.message,
+            };
         };
     };
 

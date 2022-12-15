@@ -1,7 +1,16 @@
-POST http://localhost:8080/ HTTP/1.1
+GET http://localhost:8080/api/status HTTP/1.1
+###
+
+POST http://localhost:8080/api/user/auth HTTP/1.1
 content-type: application/json
 
 {
-    "name": "teste",
-    "time": "Wed, 21 Oct 2015 18:27:50 GMT"
+    "name": "User test",
+    "email": "testuser@gmail.com",
+    "password": 123456
 }
+
+###
+GET http://localhost:8080/api/user/email/testuser@gmail.com HTTP/1.1
+content-type: application/json
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoVXNlciI6eyJpZCI6MSwibmFtZSI6IlVzZXIgdGVzdCIsInBhc3N3b3JkIjoiMTIzNDU2In0sImlhdCI6MTY3MTA3NzIzMSwiZXhwIjoxNjcxMTYzNjMxfQ.QeH631VOoEfCt2Sr9TiAOGz8C8iPKgtKhIDnofLlKec

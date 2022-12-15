@@ -7,7 +7,7 @@ export async function createInitialData() {
             force: true
         });
 
-        let password = await bcrypt.hash("123456", 10);
+        let password = 123456//await bcrypt.hash("123456", 10);
 
         await User.create({
             name: 'User test',
