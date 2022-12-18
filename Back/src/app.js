@@ -1,6 +1,6 @@
 import express from "express"
-import UserRoutes from "./src/modules/user/routes/UserRoutes.js";
-import * as db from "./src/config/db/initialData.js";
+import UserRoutes from "./modules/user/routes/UserRoutes.js";
+import * as db from "./config/db/initialData.js";
 
 const app = express();
 const env = process.env;
