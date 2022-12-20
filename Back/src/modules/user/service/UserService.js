@@ -13,12 +13,12 @@ class UserService {
                 email
             } = req.params;
             const {
-                authUser
+                authenticatedUser
             } = req;
             this.validateRequestData(email);
-            let user = await UserRepository.findByEmail(email);
+            let user = await this.getUserByEmail(email)
             this.validateUserNotFound(user);
-            this.validateAuthenticatedUser(user, authUser);
+            this.validateAuthenticatedUser(user, authenticatedUser);
             return {
                 status: httpStatus.SUCESS,
                 user: {
@@ -36,10 +36,18 @@ class UserService {
     };
 
     validateRequestData(email) {
+        const emailRegex = new RegExp(/^[a-zA-Z0-9.!#$%&'*+/^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/)
+
         if (!email) {
             throw new Exception(httpStatus.BAD_REQUEST, "User email was not informed. ");
         };
+        if (!emailRegex.test(email)) {
+            throw new Exception(httpStatus.BAD_REQUEST, "Email was not found.");
+        }
     };
+    async getUserByEmail(email){
+        return await UserRepository.findByEmail(email);
+    }
 
     validateUserNotFound(user) {
         if (!user) {
@@ -59,10 +67,11 @@ class UserService {
                 email,
                 password
             } = req.body;
-            this.validateAccessTokenData(email, password);
-            let user = await UserRepository.findByEmail(email);
+            this.validateRequestData(email);
+            this.validateRequestBody (email, password);
+            let user = await this.getUserByEmail(email)
             this.validateUserNotFound(user);
-            //await this.validatePassword(password, user.password);
+            await this.validatePassword(password.toString(), user.password);
             const authUser = {
                 id: user.id,
                 name: user.name,
@@ -85,7 +94,7 @@ class UserService {
         };
     };
 
-    validateAccessTokenData(email, password) {
+    validateRequestBody (email, password) {
         if (!email || !password) {
             throw new Exception(httpStatus.UNAUTHORIZED, "Email and password must be informed");
         };

@@ -18,7 +18,7 @@ app.get('/api/status', (req, res) => {
     });
 });
 
-app.use(UserRoutes);
+app.use('/api/user', UserRoutes);
 
 app.listen(PORT, () => {
     console.info(`Server started successfuly at port ${PORT}`)
