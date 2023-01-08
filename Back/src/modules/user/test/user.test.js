@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt";
+import assert from 'assert'
 
 import userService from '../service/UserService.js'
 
@@ -13,14 +14,16 @@ const MOCK_REQ_USER = {
 };
 
 
-describe('Sample repository test field - CRUD', function () {
+describe('User module test suite', function () {
    
    it('Getting access token', async () => {
-    console.log(MOCK_REQ_USER.body.password)
-
+    let expectedResponseAttributes = ['status', 'accessToken']
+    let expectedResponseStatus = 200
     let response = await userService.getAccessToken(MOCK_REQ_USER)
-    console.log(response)
-    console.log(MOCK_REQ_USER.body.password)
-   })
+    let actualResponseAttributes = Object.keys(response)
+    let actualResponseStatus = response.status
 
+    assert.deepStrictEqual(actualResponseAttributes, expectedResponseAttributes)
+    assert.deepStrictEqual(actualResponseStatus, expectedResponseStatus)
+   })
 });
