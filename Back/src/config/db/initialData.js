@@ -20,7 +20,7 @@ export async function createInitialData() {
             email: 'testuser2@gmail.com',
             password: password,
         });
-    } catch (err) {
-        console.log(err);
+    } catch (error) {
+        console.log(error);
     }
 };

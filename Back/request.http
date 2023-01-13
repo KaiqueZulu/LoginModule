@@ -14,3 +14,13 @@ content-type: application/json
 GET http://localhost:8080/api/user/email/testuser@gmail.com HTTP/1.1
 content-type: application/json
 Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoVXNlciI6eyJpZCI6MSwibmFtZSI6IlVzZXIgdGVzdCIsInBhc3N3b3JkIjoiMTIzNDU2In0sImlhdCI6MTY3MTUwMDU2MCwiZXhwIjoxNjcxNTg2OTYwfQ.bHC4VgbknmRCJ1_YQ80QMev3xAbW4fa_Vo990CyyzQ0
+
+###
+POST http://localhost:8080/api/user/auth/register HTTP/1.1
+content-type: application/json
+
+{
+    "name": "User test",
+    "email": "testuser@gmail.com",
+    "password": "123456"
+}

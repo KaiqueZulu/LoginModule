@@ -2,12 +2,11 @@ import bcrypt from "bcrypt";
 import User from "../model/User.js";
 
 class UserRepository {
-    async createUser(name, email, password) {
-        let hashPassword = await bcrypt.hash(password, 10);
+    async createUser({name, email, password}) {
         return User.create({
-            name: name,
-            email: email,
-            password: hashPassword
+            name,
+            email,
+            password
         });
     };
 

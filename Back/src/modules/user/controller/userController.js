@@ -6,6 +6,11 @@ class UserController {
         return res.status(accessToken.status).json(accessToken);
     };
 
+    async createUser(req,res){
+        let user = await UserService.createUser(req);
+        return res.status(user.status).json(user);
+    }
+
     async findByEmail(req, res){
         let user = await UserService.findByEmail(req);
         return res.status(user.status).json(user);

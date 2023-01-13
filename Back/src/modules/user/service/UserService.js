@@ -7,6 +7,37 @@ import * as httpStatus from "../../../constants/httpStatus.js";
 import * as secrets from "../../../constants/secrets.js";
 
 class UserService {
+    async createUser(req) {
+        try {
+            const {
+                name,
+                email,
+                password
+            } = req.body
+            let passwordHash = await this.convertPasswordToPasswordHash(password)
+
+            let user = await UserRepository.createUser({
+                name,
+                email,
+                password: passwordHash,
+            });
+            delete user.dataValues.password
+
+            return {
+                status: httpStatus.SUCESS,
+                user: user.dataValues
+            }
+        } catch (error) {
+            return {
+                status: error.status ? error.status : httpStatus.INTERNAL_SERVER_ERROR,
+                message: error.message,
+            };
+        }
+    }
+    async convertPasswordToPasswordHash(password) {
+        return bcrypt.hash(password, 10)
+    }
+
     async findByEmail(req) {
         try {
             const {
@@ -27,10 +58,10 @@ class UserService {
                     email: user.email,
                 },
             };
-        } catch (err) {
+        } catch (error) {
             return {
-                status: err.status ? err.status : httpStatus.INTERNAL_SERVER_ERROR,
-                message: err.message,
+                status: error.status ? error.status : httpStatus.INTERNAL_SERVER_ERROR,
+                message: error.message,
             };
         };
     };
@@ -45,7 +76,7 @@ class UserService {
             throw new Exception(httpStatus.BAD_REQUEST, "Email was not found.");
         }
     };
-    async getUserByEmail(email){
+    async getUserByEmail(email) {
         return await UserRepository.findByEmail(email);
     }
 
@@ -68,7 +99,7 @@ class UserService {
                 password
             } = req.body;
             this.validateRequestData(email);
-            this.validateRequestBody (email, password);
+            this.validateRequestBody(email, password);
             let user = await this.getUserByEmail(email)
             this.validateUserNotFound(user);
             await this.validatePassword(password.toString(), user.password);
@@ -86,15 +117,15 @@ class UserService {
                 status: httpStatus.SUCESS,
                 accessToken,
             };
-        } catch (err) {
+        } catch (error) {
             return {
-                status: err.status ? err.status : httpStatus.INTERNAL_SERVER_ERROR,
-                message: err.message,
+                status: error.status ? error.status : httpStatus.INTERNAL_SERVER_ERROR,
+                message: error.message,
             };
         };
     };
 
-    validateRequestBody (email, password) {
+    validateRequestBody(email, password) {
         if (!email || !password) {
             throw new Exception(httpStatus.UNAUTHORIZED, "Email and password must be informed");
         };
