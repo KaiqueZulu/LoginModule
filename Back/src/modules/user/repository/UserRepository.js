@@ -3,6 +3,7 @@ import User from "../model/User.js";
 
 class UserRepository {
     async createUser({name, email, password}) {
+        await User.sync({alter: true})
         return User.create({
             name,
             email,
