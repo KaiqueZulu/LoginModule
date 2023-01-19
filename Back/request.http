@@ -13,10 +13,10 @@ content-type: application/json
 ###
 GET http://localhost:8080/api/user/email/testuser@gmail.com HTTP/1.1
 content-type: application/json
-Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoVXNlciI6eyJpZCI6MSwibmFtZSI6IlVzZXIgdGVzdCIsInBhc3N3b3JkIjoiMTIzNDU2In0sImlhdCI6MTY3MTUwMDU2MCwiZXhwIjoxNjcxNTg2OTYwfQ.bHC4VgbknmRCJ1_YQ80QMev3xAbW4fa_Vo990CyyzQ0
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoVXNlciI6eyJpZCI6MSwibmFtZSI6IlVzZXIgdGVzdCIsInBhc3N3b3JkIjoiJDJiJDEwJDVHTFBxR1h4cVdzQnJYYUxiQmc0OE8xNUpTTlNGNGlHOWhYb2dLZ2JVNm1BcVM2VFgzcC8yIn0sImlhdCI6MTY3NDA5NzA0MSwiZXhwIjoxNjc0MTgzNDQxfQ.fO_jFse8ijoPKJg9_mw2wSwDSCCj0f7bCPE76RPgh-o
 
 ###
-POST http://localhost:8080/api/user/auth/register HTTP/1.1
+POST http://localhost:8080/api/user/register HTTP/1.1
 content-type: application/json
 
 {

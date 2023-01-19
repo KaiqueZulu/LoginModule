@@ -11,8 +11,8 @@ class UserController {
         return res.status(user.status).json(user);
     }
 
-    async findByEmail(req, res){
-        let user = await UserService.findByEmail(req);
+    async findUserByEmail(req, res){
+        let user = await UserService.findUserByEmail(req);
         return res.status(user.status).json(user);
     };
 };

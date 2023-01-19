@@ -14,7 +14,7 @@ class UserService {
                 email,
                 password
             } = req.body
-            let passwordHash = await this.convertPasswordToPasswordHash(password)
+            let passwordHash = await this.#convertPasswordToPasswordHash(password)
 
             let user = await UserRepository.createUser({
                 name,
@@ -34,11 +34,11 @@ class UserService {
             };
         }
     }
-    async convertPasswordToPasswordHash(password) {
+    async #convertPasswordToPasswordHash(password) {
         return bcrypt.hash(password, 10)
     }
 
-    async findByEmail(req) {
+    async findUserByEmail(req) {
         try {
             const {
                 email
@@ -46,10 +46,10 @@ class UserService {
             const {
                 authenticatedUser
             } = req;
-            this.validateRequestData(email);
-            let user = await this.getUserByEmail(email)
-            this.validateUserNotFound(user);
-            this.validateAuthenticatedUser(user, authenticatedUser);
+            this.#validateRequestData(email);
+            let user = await this.#getUserByEmail(email)
+            this.#validateUserNotFound(user);
+            this.#validateAuthenticatedUser(user, authenticatedUser);
             return {
                 status: httpStatus.SUCESS,
                 user: {
@@ -66,7 +66,7 @@ class UserService {
         };
     };
 
-    validateRequestData(email) {
+    #validateRequestData(email) {
         const emailRegex = new RegExp(/^[a-zA-Z0-9.!#$%&'*+/^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/)
 
         if (!email) {
@@ -76,17 +76,17 @@ class UserService {
             throw new Exception(httpStatus.BAD_REQUEST, "Email was not found.");
         }
     };
-    async getUserByEmail(email) {
+    async #getUserByEmail(email) {
         return await UserRepository.findByEmail(email);
     }
 
-    validateUserNotFound(user) {
+    #validateUserNotFound(user) {
         if (!user) {
             throw new Exception(httpStatus.BAD_REQUEST, "User was not found.");
         };
     };
 
-    validateAuthenticatedUser(user, authUser) {
+    #validateAuthenticatedUser(user, authUser) {
         if (!authUser || user.id !== authUser.id) {
             throw new Exception(httpStatus.FORBIDDEN, "You cannot see this user data.");
         };
@@ -98,11 +98,11 @@ class UserService {
                 email,
                 password
             } = req.body;
-            this.validateRequestData(email);
-            this.validateRequestBody(email, password);
-            let user = await this.getUserByEmail(email)
-            this.validateUserNotFound(user);
-            await this.validatePassword(password.toString(), user.password);
+            this.#validateRequestData(email);
+            this.#validateRequestBody(email, password);
+            let user = await this.#getUserByEmail(email)
+            this.#validateUserNotFound(user);
+            await this.#validatePassword(password.toString(), user.password);
             const authUser = {
                 id: user.id,
                 name: user.name,
@@ -125,13 +125,13 @@ class UserService {
         };
     };
 
-    validateRequestBody(email, password) {
+    #validateRequestBody(email, password) {
         if (!email || !password) {
             throw new Exception(httpStatus.UNAUTHORIZED, "Email and password must be informed");
         };
     };
 
-    async validatePassword(password, hashPassword) {
+    async #validatePassword(password, hashPassword) {
         if (!await bcrypt.compare(password, hashPassword)) {
             throw new Exception(httpStatus.UNAUTHORIZED, "Password doesn't match.");
         };

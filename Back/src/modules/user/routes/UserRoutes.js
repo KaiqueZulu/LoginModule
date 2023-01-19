@@ -8,10 +8,8 @@ import checkToken from "../../../middlewares/auth/checkToken.js"
 const router = new Router();
 
 router.post("/auth", UserController.getAccessToken);
-router.post("/auth/register", UserController.createUser);
+router.post("/register", UserController.createUser);
 
-router.use(checkToken);
-
-router.get("/email/:email", UserController.findByEmail);
+router.get("/email/:email", checkToken, UserController.findUserByEmail);
 
 export default router;
