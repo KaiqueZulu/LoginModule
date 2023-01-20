@@ -106,7 +106,7 @@ class UserService {
             const authUser = {
                 id: user.id,
                 name: user.name,
-                password: user.password
+                email: user.email
             };
             const accessToken = jwt.sign({
                 authUser
@@ -136,6 +136,24 @@ class UserService {
             throw new Exception(httpStatus.UNAUTHORIZED, "Password doesn't match.");
         };
     };
+
+    async updateUserById(req) {
+        try {
+           let {authenticatedUser} = req;
+           console.log(authenticatedUser)
+            return {
+                status: httpStatus.SUCESS,
+                user: {},
+            };
+
+        } catch (error) {
+            return {
+                status: error.status ? error.status : httpStatus.INTERNAL_SERVER_ERROR,
+                message: error.message,
+            };
+        }
+    }
+
 };
 
 export default new UserService();

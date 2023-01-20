@@ -15,6 +15,11 @@ class UserController {
         let user = await UserService.findUserByEmail(req);
         return res.status(user.status).json(user);
     };
+
+    async updateUserById(req, res){
+        let user = await UserService.updateUserById(req);
+        return res.status(user.status).json(user);
+    };
 };
 
 export default new UserController();

@@ -4,7 +4,7 @@ import User from "../../modules/user/model/User.js";
 export async function createInitialData() {
     try {
      
-        let password = await bcrypt.hash("123456", 10);
+        let password = "123456";
 
         await User.create({
             name: 'User test',

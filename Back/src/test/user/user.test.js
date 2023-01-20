@@ -1,10 +1,8 @@
-import bcrypt from 'bcrypt';
+
 import assert from 'assert';
 import MockExpressRequest  from 'mock-express-response';
 
 import userController from '../../modules/user/controller/userController.js';
-
-//let password = await bcrypt.hash("123456", 10);
 
 const MOCK_REQ_USER = {
     body: {
@@ -13,10 +11,6 @@ const MOCK_REQ_USER = {
         password: '123456',
     }
 };
-
-
- 
-
 
 describe('User module test suite', function () {
     it('Create user', async () => {
@@ -37,6 +31,14 @@ describe('User module test suite', function () {
         let actualResponseStatus = answerData.status
         assert.deepStrictEqual(actualResponseAttributes, expectedResponseAttributes)
         assert.deepStrictEqual(actualResponseStatus, expectedResponseStatus)
+    })
+
+    it('Update user by ID', async () => {
+        const MOCK_RES_USER = new MockExpressRequest();
+        let expectedResponseAttributes = ['status','user'];
+        let response = await userController.updateUserById(MOCK_REQ_USER, MOCK_RES_USER)
+        let actualResponseAttributes = Object.keys(response._getJSON())
+        assert.deepStrictEqual(actualResponseAttributes, expectedResponseAttributes)
     })
 
 });
