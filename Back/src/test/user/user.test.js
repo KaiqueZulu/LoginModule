@@ -11,6 +11,19 @@ const MOCK_REQ_USER = {
         password: '123456',
     }
 };
+const MOCK_REQ_UPDATE_USER = {
+    authenticatedUser: {
+        id: 1,
+        name: 'User test',
+        email: 'testuser@gmail.com',
+        
+    },
+    body: {
+        name: 'Kaique',
+        email: 'kaique@gmail.com',
+        password: '123456',
+    }
+};
 
 describe('User module test suite', function () {
     it('Create user', async () => {
@@ -36,7 +49,7 @@ describe('User module test suite', function () {
     it('Update user by ID', async () => {
         const MOCK_RES_USER = new MockExpressRequest();
         let expectedResponseAttributes = ['status','user'];
-        let response = await userController.updateUserById(MOCK_REQ_USER, MOCK_RES_USER)
+        let response = await userController.updateUserById(MOCK_REQ_UPDATE_USER, MOCK_RES_USER)
         let actualResponseAttributes = Object.keys(response._getJSON())
         assert.deepStrictEqual(actualResponseAttributes, expectedResponseAttributes)
     })

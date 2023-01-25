@@ -140,13 +140,20 @@ class UserService {
     async updateUserById(req) {
         try {
            let {authenticatedUser} = req;
-           console.log(authenticatedUser)
+           let userChanges = req.body
+           let attributesToChange = Object.keys(userChanges)
+           let {dataValues : user} = await this.#getUserByEmail(authenticatedUser.email)
+           console.log('test', user)
+           for(let attribute of attributesToChange){
+                console.log(authenticatedUser)
+           }
             return {
                 status: httpStatus.SUCESS,
                 user: {},
             };
 
         } catch (error) {
+            console.log(error.message)
             return {
                 status: error.status ? error.status : httpStatus.INTERNAL_SERVER_ERROR,
                 message: error.message,
