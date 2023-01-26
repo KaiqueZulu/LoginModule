@@ -1,12 +1,15 @@
 
 import assert from 'assert';
 import MockExpressRequest  from 'mock-express-response';
+import {randomUUID} from 'crypto';
 
 import userController from '../../modules/user/controller/userController.js';
 
+const UUID = randomUUID()
+
 const MOCK_REQ_USER = {
     body: {
-        name: 'User test',
+        name: `User test ${UUID}`,
         email: 'testuser@gmail.com',
         password: '123456',
     }
@@ -14,14 +17,13 @@ const MOCK_REQ_USER = {
 const MOCK_REQ_UPDATE_USER = {
     authenticatedUser: {
         id: 1,
-        name: 'User test',
-        email: 'testuser@gmail.com',
+        name: `Kaique ${UUID}`,
+        email: `testuser@gmail.com`,
         
     },
     body: {
-        name: 'Kaique',
+        name: `Kaique ${UUID}`,
         email: 'kaique@gmail.com',
-        password: '123456',
     }
 };
 

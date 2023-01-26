@@ -139,14 +139,17 @@ class UserService {
 
     async updateUserById(req) {
         try {
-           let {authenticatedUser} = req;
-           let userChanges = req.body
-           let attributesToChange = Object.keys(userChanges)
-           let {dataValues : user} = await this.#getUserByEmail(authenticatedUser.email)
-           console.log('test', user)
-           for(let attribute of attributesToChange){
-                console.log(authenticatedUser)
-           }
+            let { authenticatedUser } = req;
+            let userChanges = req.body
+            let attributesToChange = Object.keys(userChanges)
+            let { dataValues: user } = await this.#getUserByEmail(authenticatedUser.email)
+
+            for (let attribute of attributesToChange) {
+                user[attribute] = userChanges[attribute];
+            }
+            let [{dataValues : updatedUser}] = await UserRepository.updateUser(user)
+            console.log(updatedUser)
+            
             return {
                 status: httpStatus.SUCESS,
                 user: {},
