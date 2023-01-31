@@ -27,6 +27,15 @@ const MOCK_REQ_UPDATE_USER = {
     }
 };
 
+const MOCK_REQ_DELETE_USER = {
+    authenticatedUser: {
+        id: UUID,
+        name: `Kaique ${UUID}`,
+        email: `kaique@gmail.com`,
+        
+    },
+};
+
 describe('User module test suite', function () {
     it('Create user', async () => {
         const MOCK_RES_USER = new MockExpressRequest();
@@ -48,12 +57,21 @@ describe('User module test suite', function () {
         assert.deepStrictEqual(actualResponseStatus, expectedResponseStatus)
     })
 
-    it('Update user by ID', async () => {
+    it('Update user by email', async () => {
         const MOCK_RES_USER = new MockExpressRequest();
         let expectedResponseAttributes = ['status','user'];
         let response = await userController.updateUserByEmail(MOCK_REQ_UPDATE_USER, MOCK_RES_USER)
         let actualResponseAttributes = Object.keys(response._getJSON())
         assert.deepStrictEqual(actualResponseAttributes, expectedResponseAttributes)
+    })
+
+    it('Delete user by email', async () => {
+        const MOCK_RES_USER = new MockExpressRequest();
+        let expectedResponseAttributes = ['status','message'];
+        let response = await userController.deleteUserByEmail(MOCK_REQ_DELETE_USER, MOCK_RES_USER)
+        let actualResponseAttributes = Object.keys(response._getJSON())
+        assert.deepStrictEqual(actualResponseAttributes, expectedResponseAttributes)
+        assert.deepStrictEqual(response._getJSON().status, 200)
     })
 
 });

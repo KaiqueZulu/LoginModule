@@ -28,10 +28,16 @@ content-type: application/json
 ###
 PATCH  http://localhost:8080/api/user/ HTTP/1.1
 content-type: application/json
-Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoVXNlciI6eyJpZCI6MSwibmFtZSI6IlVzZXIgdGVzdCIsImVtYWlsIjoidGVzdHVzZXJAZ21haWwuY29tIn0sImlhdCI6MTY3NTEyNDY1NiwiZXhwIjoxNjc1MjExMDU2fQ.PJZ2aIlgVSeDDcL2Rs3OAVHAvY4k-SL7Tn_F3VN65Ng
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoVXNlciI6eyJpZCI6MywibmFtZSI6IlVzZXIgdGVzdCIsImVtYWlsIjoidGVzdHVzZXJAZ21haWwuY29tIn0sImlhdCI6MTY3NTEzMTQ1OSwiZXhwIjoxNjc1MjE3ODU5fQ.ygFCAajfQ4FHvZdP3UVaS3eQ2dQUSQabIcj63rRyOGg
 
 {
     "name": "User update",
     "email": "updateuser@gmail.com",
     "password": "654321"
 }
+
+###
+DELETE  http://localhost:8080/api/user/ HTTP/1.1
+content-type: application/json
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoVXNlciI6eyJpZCI6MywibmFtZSI6IlVzZXIgdXBkYXRlIiwiZW1haWwiOiJ1cGRhdGV1c2VyQGdtYWlsLmNvbSJ9LCJpYXQiOjE2NzUxMzE2MDEsImV4cCI6MTY3NTIxODAwMX0.Iksrj8DqPHN6XR8_9Wju366ZtpOttIjKwsHAKxZGGv8
+

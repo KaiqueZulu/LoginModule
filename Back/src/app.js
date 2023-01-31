@@ -1,12 +1,9 @@
 import express from "express"
 import UserRoutes from "./modules/user/routes/UserRoutes.js";
-import * as db from "./config/db/initialData.js";
 
 const app = express();
 const env = process.env;
 const PORT = env.PORT || 8080;
-
-db.createInitialData();
 
 app.use(express.json()) // for parsing application/json
 

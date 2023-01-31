@@ -167,6 +167,35 @@ class UserService {
         }
     }
 
+    async deleteUserByEmail(req) {
+        try {
+            const {
+                authenticatedUser
+            } = req;
+            let deletionstatus = await UserRepository.dropUser(authenticatedUser.email)
+            switch (deletionstatus) {
+                case 0:
+                    return {
+                        status: httpStatus.BAD_REQUEST,
+                        message: 'User does not exist'
+                    };
+                case 1:
+                    return {
+                        status: httpStatus.SUCESS,
+                        message: 'Successful Deleted User'
+                    };
+
+
+            }
+
+        } catch (error) {
+            console.log(error)
+            return {
+                status: error.status ? error.status : httpStatus.INTERNAL_SERVER_ERROR,
+                message: error.message,
+            };
+        };
+    }
 };
 
 export default new UserService();

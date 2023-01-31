@@ -20,6 +20,10 @@ class UserController {
         let user = await UserService.updateUserByEmail(req);
         return res.status(user.status).json(user);
     };
+    async deleteUserByEmail(req, res){
+        let user = await UserService.deleteUserByEmail(req);
+        return res.status(user.status).json(user);
+    };
 };
 
 export default new UserController();
