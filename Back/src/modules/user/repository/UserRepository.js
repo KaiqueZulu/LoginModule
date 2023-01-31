@@ -17,7 +17,7 @@ class UserRepository {
         });
     };
 
-    updateUser(userToUpdate){
+    updateUserByEmail(userToUpdate){
         return User.upsert(userToUpdate);
     };
 

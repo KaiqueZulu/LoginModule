@@ -137,7 +137,7 @@ class UserService {
         };
     };
 
-    async updateUserById(req) {
+    async updateUserByEmail(req) {
         try {
             let { authenticatedUser } = req;
             let userChanges = req.body
@@ -145,14 +145,17 @@ class UserService {
             let { dataValues: user } = await this.#getUserByEmail(authenticatedUser.email)
 
             for (let attribute of attributesToChange) {
-                user[attribute] = userChanges[attribute];
+                if (attribute == "password") {
+                    user[attribute] = await this.#convertPasswordToPasswordHash(userChanges[attribute])
+                } else {
+                    user[attribute] = userChanges[attribute];
+                }
             }
-            let [{dataValues : updatedUser}] = await UserRepository.updateUser(user)
-            console.log(updatedUser)
-            
+            let [{ dataValues: updatedUser }] = await UserRepository.updateUserByEmail(user)
+            delete updatedUser.password;
             return {
                 status: httpStatus.SUCESS,
-                user: {},
+                user: updatedUser,
             };
 
         } catch (error) {

@@ -28,4 +28,10 @@ content-type: application/json
 ###
 PATCH  http://localhost:8080/api/user/ HTTP/1.1
 content-type: application/json
-Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoVXNlciI6eyJpZCI6MSwibmFtZSI6IlVzZXIgdGVzdCIsImVtYWlsIjoidGVzdHVzZXJAZ21haWwuY29tIn0sImlhdCI6MTY3NDYyODI0NywiZXhwIjoxNjc0NzE0NjQ3fQ.X1808msli0pZ_6v6yDg2rXgiPHgElMAxsoU7DzV1tAw
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoVXNlciI6eyJpZCI6MSwibmFtZSI6IlVzZXIgdGVzdCIsImVtYWlsIjoidGVzdHVzZXJAZ21haWwuY29tIn0sImlhdCI6MTY3NTEyNDY1NiwiZXhwIjoxNjc1MjExMDU2fQ.PJZ2aIlgVSeDDcL2Rs3OAVHAvY4k-SL7Tn_F3VN65Ng
+
+{
+    "name": "User update",
+    "email": "updateuser@gmail.com",
+    "password": "654321"
+}

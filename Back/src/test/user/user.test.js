@@ -51,7 +51,7 @@ describe('User module test suite', function () {
     it('Update user by ID', async () => {
         const MOCK_RES_USER = new MockExpressRequest();
         let expectedResponseAttributes = ['status','user'];
-        let response = await userController.updateUserById(MOCK_REQ_UPDATE_USER, MOCK_RES_USER)
+        let response = await userController.updateUserByEmail(MOCK_REQ_UPDATE_USER, MOCK_RES_USER)
         let actualResponseAttributes = Object.keys(response._getJSON())
         assert.deepStrictEqual(actualResponseAttributes, expectedResponseAttributes)
     })

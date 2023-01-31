@@ -9,6 +9,6 @@ router.get("/auth", UserController.getAccessToken);
 
 router.post("/register", UserController.createUser);
 router.get("/:email", checkToken, UserController.findUserByEmail);
-router.patch('/', checkToken, UserController.updateUserById);
+router.patch('/', checkToken, UserController.updateUserByEmail);
 
 export default router;
