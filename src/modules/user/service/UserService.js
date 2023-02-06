@@ -115,7 +115,7 @@ class UserService {
             });
             return {
                 status: httpStatus.SUCESS,
-                accessToken,
+                accessToken: "Bearer " + accessToken,
             };
         } catch (error) {
             return {
