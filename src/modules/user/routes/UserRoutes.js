@@ -5,11 +5,11 @@ import checkToken from "../../../middlewares/auth/checkToken.js"
 
 const router = new Router();
 
-router.get("/auth", UserController.getAccessToken);
+router.post("/auth", UserController.getAccessToken);
 
 router.post("/register", UserController.createUser);
 router.get("/:email", checkToken, UserController.findUserByEmail);
 router.patch('/', checkToken, UserController.updateUserByEmail);
-router.delete('/', checkToken, UserController.deleteUserByEmail);
+router.delete('/delete', checkToken, UserController.deleteUserByEmail);
 
 export default router;

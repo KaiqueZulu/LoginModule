@@ -1,7 +1,7 @@
 GET http://localhost:8080/api/status HTTP/1.1
 ###
 
-GET http://localhost:8080/api/user/auth HTTP/1.1
+POST http://localhost:8080/api/user/auth HTTP/1.1
 content-type: application/json
 
 {
@@ -37,7 +37,7 @@ Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoVXNlciI6eyJpZC
 }
 
 ###
-DELETE  http://localhost:8080/api/user/ HTTP/1.1
+DELETE  http://localhost:8080/api/user/delete HTTP/1.1
 content-type: application/json
-Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoVXNlciI6eyJpZCI6MywibmFtZSI6IlVzZXIgdXBkYXRlIiwiZW1haWwiOiJ1cGRhdGV1c2VyQGdtYWlsLmNvbSJ9LCJpYXQiOjE2NzUxMzE2MDEsImV4cCI6MTY3NTIxODAwMX0.Iksrj8DqPHN6XR8_9Wju366ZtpOttIjKwsHAKxZGGv8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoVXNlciI6eyJpZCI6MSwibmFtZSI6IlVzZXIgdGVzdCIsImVtYWlsIjoidGVzdHVzZXJAZ21haWwuY29tIn0sImlhdCI6MTY3NTY1NzQxMCwiZXhwIjoxNjc1NzQzODEwfQ.IZjHWx_y7_Atm-vnxy8vRHd-rSXzXMMgzBVQSZz2JKU
 

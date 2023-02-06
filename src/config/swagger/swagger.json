@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "Login API",
-    "description": "Login module with user CRUD and authentication",
+    "description": "Login module. This is a module in the microservices architecture with user authentication and CRUD.",
     "contact": {
       "email": "kaiqueroberto.pires@gmail.com"
     },
@@ -14,12 +14,67 @@
       "description": "API in development"
     },
     {
-      "url": "https://8080-kaiquepires-loginmodule-b8q3y67aj1b.ws-us85.gitpod.io/",
+      "url": "https://8080-kaiquepires-loginmodule-iukk8a54h49.ws-us85.gitpod.io/",
       "description": "GitPod"
     }
   ],
   "paths": {
-    
+    "/api/user/auth": {
+      "post": {
+        "summary": "Get access token",
+        "tags": [
+          "Auth"
+        ],
+        "security": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/user"
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "name": "User test",
+                    "email": "testuser@gmail.com",
+                    "password": 123456
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number"
+                    },
+                    "accessToken": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "status": 200,
+                      "accessToken": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoVXNlciI6eyJpZCI6MywibmFtZSI6IlVzZXIgdGVzdCIsImVtYWlsIjoidGVzdHVzZXJAZ21haWwuY29tIn0sImlhdCI6MTY3NTY1ODkyNCwiZXhwIjoxNjc1NzQ1MzI0fQ.3iBLOU7v21BfSb-KCP9KEa70Dl9L_YN9lAbYd6Mk8ls"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/user/register": {
       "post": {
         "summary": "Create user",
@@ -72,6 +127,18 @@
                       }
                     }
                   }
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "status": 200,
+                      "user": {
+                        "id": 1,
+                        "name": "User test",
+                        "email": "testuser@gmail.com"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -93,6 +160,7 @@
         "parameters": [
           {
             "name": "email",
+            "description": "Logged-in user's email, this route only returns data from the logged-in user",
             "in": "path",
             "required": true
           }
@@ -108,7 +176,7 @@
                     "status": {
                       "type": "number"
                     },
-                    "samples": {
+                    "user": {
                       "type": "object"
                     }
                   }
@@ -130,6 +198,122 @@
           }
         }
       }
+    },
+    "/api/user/": {
+      "patch": {
+        "summary": "Update user",
+        "tags": [
+          "User"
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/user"
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "name": "User update",
+                    "email": "updateuser@gmail.com",
+                    "password": "654321"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number"
+                    },
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "email": {
+                          "type": "string"
+                        },
+                        "password": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "user": {
+                    "value": {
+                      "status": 200,
+                      "user": {
+                        "id": 1,
+                        "name": "User update",
+                        "email": "updateuser@gmail.com"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/user/delete": {
+      "delete": {
+        "summary": "Delete user",
+        "tags": [
+          "User"
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "status": 200,
+                      "message": "Successful Deleted User"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -142,20 +326,6 @@
     },
     "schemas": {
       "user": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "email": {
-            "type": "string"
-          },
-          "password": {
-            "type": "string"
-          }
-        }
-      },
-      "auth": {
         "type": "object",
         "properties": {
           "name": {
